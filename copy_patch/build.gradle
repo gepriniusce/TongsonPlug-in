@@ -1,0 +1,64 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+
+compileGroovy {
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+    options.encoding = "UTF-8"
+}
+dependencies {
+    //gradle sdk
+    compile gradleApi()
+    //groovy sdk
+    compile localGroovy()
+    compile 'com.android.tools.build:gradle:2.2.1'
+
+
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+ext {
+    PUBLISH_GROUP_ID = 'pr.tongson.packutil'
+    PUBLISH_ARTIFACT_ID = 'packutil'
+    PUBLISH_VERSION = '1.0.0'
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        def deployPath = file(getProperty('aar.path'))
+        repository(url: "file://${deployPath.absolutePath}")
+        pom.project {
+            groupId project.PUBLISH_GROUP_ID
+            artifactId project.PUBLISH_ARTIFACT_ID
+            version project.PUBLISH_VERSION
+        }
+    }
+}
+
+
+
+
+
+//用本地的maven
+//group和version在后面使用自定义插件的时候会用到
+//group='pr.tongson.packutil'
+//version='1.0.0'
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            //提交到远程服务器：
+//            // repository(url: "http://www.xxx.com/repos") {
+//            //    authentication(userName: "admin", password: "admin")
+//            // }
+//            //本地的Maven地址设置为D:/repos
+//            repository(url: uri('C:/repos'))
+//        }
+//    }
+//}
+//
