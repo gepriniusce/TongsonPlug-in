@@ -24,9 +24,9 @@ repositories {
 }
 
 ext {
-    PUBLISH_GROUP_ID = 'pr.tongson.packutil'
-    PUBLISH_ARTIFACT_ID = 'packutil'
-    PUBLISH_VERSION = '1.0.0'
+    PUBLISH_GROUP_ID = "${PUBLISH_GROUP_ID}"
+    PUBLISH_ARTIFACT_ID = "${PUBLISH_ARTIFACT_ID}"
+    PUBLISH_VERSION = "${APP_VERSION_NAME}"
 }
 
 uploadArchives {
@@ -40,10 +40,6 @@ uploadArchives {
         }
     }
 }
-
-
-
-
 
 //用本地的maven
 //group和version在后面使用自定义插件的时候会用到
